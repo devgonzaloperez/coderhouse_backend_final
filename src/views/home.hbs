@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <!----------CSS---------->
+        <link rel="stylesheet" href="../home/styles.css">
+        <!----------CDN MOMENT JS---------->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>        
+    </head>
+    <body>
+
+        <header>
+            <div class="header__userData">
+                <figure>
+                    <img src={{user.avatarURL}} alt="Avatar">
+                </figure>
+                <span>{{user.userName}}</span>
+            </div>
+            <button><a href="/logout">Logout</a></button>
+        </header>
+        
+        <main class="main">
+
+            <section class="main__sectionOne">
+
+                <!--------------------FORM P/ AGREGAR PRODUCTOS-------------------->
+                {{#if user.isAdmin}}
+                    <div class="main__sectionOne-formContainer">
+                        <h1>Add a product to DDBB.</h1>
+                        <form id="products-form" method="post">
+                            
+                            <input type="text" id="name" name="name" placeholder="Product Name">
+
+                            <input type="text" id="description" name="description" placeholder="Product Description">
+
+                            <input type="text" id="price" name="price" placeholder="Price">
+
+                            <input type="text" id="stock" name="stock" placeholder="Stock">
+                                    
+                            <input type="text" id="imageURL" name="imageURL" placeholder="Image (URL)">
+                
+                            <button>Add</button>
+                        </form>
+                    </div>
+                {{/if}}
+
+                <!--------------------LISTA DE PRODUCTOS-------------------->
+                <div class="main__sectionOne-productList">
+                    <h1>Products.</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Image (URL)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productos">
+                        {{#each arrProducts}}
+                            <tr>
+                                <td>{{this._id}}</td>
+                                <td>{{this.name}}</td>
+                                <td>{{this.description}}</td>
+                                <td>{{this.price}}</td>
+                                <td>{{this.stock}}</td>
+                                <td>{{this.imageURL}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--------------------CHAT-------------------->
+                <div class="main__sectionOne-chat">
+                    <h2>Chat</h2>
+                    <div id="mensajes"></div>
+                    <form id="chat-form">
+                        <input type="email" id="nombre" placeholder="E-mail" autocomplete="off">
+                        <input type="text" id="texto" placeholder="Message" autocomplete="off">
+                        <input type="submit" id="submitButton" value="Send">
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!----------SCRIPT JS---------->
+        <script src="../home/home.js"></script>
+    </body>
+</html>
