@@ -27,6 +27,7 @@ import { logger } from './src/logger/logger.js';
 import { loggerNoRoute, loggerRoute } from './src/middlewares/logger.middleware.js';
 import { sendWhatsAppToAdmin } from './src/utils/twilio.js';
 import { ProductsDAOFactory } from './src/services/DAOs/ProductsDAOFactory.js';
+import { mongoURI, mongoSecret } from './src/configs/config.js';
 
 const yargs = Yargs(process.argv.slice(2)).argv;
 
@@ -79,10 +80,10 @@ else{
 
     app.use(session({
         store: connectMongo.create({
-            mongoUrl: process.env.MONGO_URI,
+            mongoUrl: mongoURI,
             options: {userNewUrlParser: true, useUnifiedTopology: true}
         }),
-        secret: process.env.SECRET_MONGO_CONNECT,
+        secret: mongoSecret,
         resave: true,
         saveUninitialized: true,
         rolling: true, //Sirve para que, con cada refresh, se vuelvan a acumular 10000ms y no se borre automáticamente a los 10000ms.
@@ -173,8 +174,10 @@ else{
                                                                                     
     /*-----------------------------------SERVER:------------------------------------*/
 
-    server.listen(process.env.PORT, ()=>{
-        logger.info(`Server started on PORT ${process.env.PORT}!`)
+    const PORT = yargs.port || process.env.PORT;
+
+    server.listen(PORT, ()=>{
+        logger.info(`Server started on PORT ${PORT}!`)
     });
 
     server.on('error', (error)=>{logger.error(error)});

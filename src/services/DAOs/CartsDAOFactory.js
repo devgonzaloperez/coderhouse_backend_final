@@ -1,10 +1,11 @@
+import Yargs from 'yargs';
 import { CartsDAOMongoDB } from "./CartsDAOMongoDB.js"; //En este caso, al haber solo un dao, siempre utilizo MongoDB, pero podría agregar otro DAO en un futuro.
 
-const option = process.argv[2] || "";
-
+const yargs = Yargs(process.argv.slice(2)).argv;
+const persistence = yargs.persistence || "";
 let dao;
 
-switch (option){
+switch (persistence){
   case "mongo":
     dao = new CartsDAOMongoDB();
     dao.init();

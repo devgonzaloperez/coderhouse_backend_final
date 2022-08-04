@@ -1,11 +1,13 @@
+import Yargs from 'yargs';
 import { ProductsDAOFile } from "./ProductsDAOFile.js";
 import { ProductsDAOMongoDB } from "./ProductsDAOMongoDB.js";
 
-const option = process.argv[2] || "";
-
+const yargs = Yargs(process.argv.slice(2)).argv;
+const persistence = yargs.persistence || "";
 let dao;
 
-switch (option){
+
+switch (persistence){
   case "mongo":
     dao = new ProductsDAOMongoDB();
     dao.init();
