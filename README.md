@@ -7,7 +7,7 @@ npx nodemon server.js --enviroment DEV
 npx nodemon server.js --enviroment PROD
 
 b) Elegir Puerto.
-npx nodemon server.js --port 3000
+- npx nodemon server.js --port 3000
 
 c) Elegir Fork o Cluster.
 - Fork (Default).
@@ -16,7 +16,7 @@ npx nodemon server.js --mode FORK
 npx nodemon server.js --mode CLUSTER
 
 d) Elegir Persistencia.
-npx nodemon server.js --persistence mongo
+- npx nodemon server.js --persistence mongo
 
 Ejemplo Completo.
 npx nodemon server.js --enviroment DEV --port 3000 --mode FORK --persistence mongo
