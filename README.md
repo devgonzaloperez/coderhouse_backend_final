@@ -19,6 +19,6 @@ d) Elegir Persistencia.
 - npx nodemon server.js --persistence mongo
 
 Ejemplo Completo.
-npx nodemon server.js --enviroment DEV --port 3000 --mode FORK --persistence mongo
+- npx nodemon server.js --enviroment DEV --port 3000 --mode FORK --persistence mongo
 
 
